@@ -47,7 +47,7 @@ jobs:
 
     - name: Build pages
       run: |
-        poetr run mkdocs build -s -d _site
+        poetry run mkdocs build -s -d _site
         cp -r dist/ _site/dist
         ls -la _site
         ls -la _site/dist
