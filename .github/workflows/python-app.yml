@@ -45,10 +45,9 @@ jobs:
       with:
         enablement: true
 
-    - name: Create Pages Folder
+    - name: Build pages
       run: |
-        mkdir _site
-        cp README.md _site/index.md
+        poetr run mkdocs build -s -d _site
         cp -r dist/ _site/dist
         ls -la _site
         ls -la _site/dist

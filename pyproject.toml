@@ -16,6 +16,9 @@ pre-commit-hooks = "^4.6.0"
 ruff = "^0.6.4"
 commitizen = "^3.29.0"
 reuse = "^4.0.3"
+mkdocs = "^1.6.1"
+pymdown-extensions = "^10.9"
+mkdocs-material = "^9.5.34"
 
 [build-system]
 requires = ["poetry-core"]
