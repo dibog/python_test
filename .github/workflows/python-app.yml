@@ -30,7 +30,7 @@ jobs:
         poetry install
     - name: Check pre-commit
       run: |
-        pre-commit run -a
+        poetry run pre-commit run -a
     # - name: Lint with flake8
     #   run: |
     #     # stop the build if there are Python syntax errors or undefined names
