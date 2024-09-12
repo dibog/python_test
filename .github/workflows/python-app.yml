@@ -38,6 +38,7 @@ jobs:
     - name: Build Wheel
       run: |
         poetry build
+        ls -la dist
 
     - name: Setup Pages
       uses: actions/configure-pages@v5
@@ -49,6 +50,8 @@ jobs:
         mkdir _site
         cp README.md _site/index.md
         cp -r dist/ _site/dist
+        ls -la _site
+        ls -la _site/dist
 
     - name: Upload Pages Folder
       uses: actions/upload-pages-artifact@v3
