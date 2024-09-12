@@ -38,8 +38,11 @@ jobs:
     - name: Build Wheel
       run: |
         poetry build
+        ls -la dist
         mkdir _site
         mv dist/ _site/dist/
+        ls -la _site/dist
+        tree _site
 
     - name: Setup Pages
       uses: actions/configure-pages@v5
