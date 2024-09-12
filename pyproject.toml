@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "python-test"
+version = "0.1.0"
+description = ""
+authors = ["Dieter Bogdoll <dibog@github.com>"]
+readme = "README.md"
+packages = [{include = "python_test"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.8.0"
+pre-commit = "^3.8.0"
+pre-commit-hooks = "^4.6.0"
+ruff = "^0.6.4"
+commitizen = "^3.29.0"
+reuse = "^4.0.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
