@@ -34,3 +34,31 @@ jobs:
     - name: Check pre-commit
       run: |
         poetry run pre-commit run -a
+
+    - name: Setup Pages
+      uses: actions/configure-pages@v5
+
+    - name: Create Pages Folder
+      run: |
+        mkdir _site
+        cp README.md _site/index.md
+
+    - name: Upload Pages Folder
+      uses: actions/upload-pages-artifact@v3
+
+  deploy:
+    needs: build
+
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
