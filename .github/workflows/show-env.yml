@@ -1,0 +1,9 @@
+name: Show Envs
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: [push]
+jobs:
+  show-env:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          env | sort
