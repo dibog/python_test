@@ -27,14 +27,9 @@ jobs:
         cache: 'poetry'
 
     - run: poetry install
-
-    - name: Check pre-commit
-      run: poetry run pre-commit run -a
-
-    - name: Build Wheel
-      run: |
-        poetry build
-        mv dist/ docs/dist/
+    - run: env | sort
+    - run: poetry run pre-commit run -a
+    - run: poetry build
 
     - name: Setup Pages
       uses: actions/configure-pages@v5
@@ -42,7 +37,9 @@ jobs:
         enablement: true
 
     - name: Build pages
-      run: poetry run mkdocs build -s -d _site
+      run: |
+        mv dist/ docs/dist/
+        poetry run mkdocs build -s -d _site
 
     - name: Upload Pages Folder
       uses: actions/upload-pages-artifact@v3

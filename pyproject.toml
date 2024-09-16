@@ -8,6 +8,7 @@ packages = [{include = "python_test"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
+commitizen = "^3.29.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.8.0"
