@@ -19,22 +19,34 @@ jobs:
     environment: pypi.org
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout source code
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Install poetry
+      - name: Install Poetry
         run: pipx install poetry
 
-      - uses: actions/setup-python@v5
+      - name: Setup python environment
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
           cache: 'poetry'
+
+      - name: Install project dependencies
+        run: poetry install
+
+      - name: Run pre-commit hooks
+        run: poetry run pre-commit run -a
+
+      - name: Build package distributions
+        run: poetry build
 
       - name: Publish package distributions to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           repository-url: https://test.pypi.org/legacy/
+          packages-dir: custom-dir/
         # NOTE: DO NOT wrap the conditional in ${{ }} as it will always evaluate to true.
         # See https://github.com/actions/runner/issues/1173
         if: steps.release.outputs.released == 'true'
