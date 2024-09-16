@@ -47,7 +47,6 @@ jobs:
           packages-dir: dist/
         # NOTE: DO NOT wrap the conditional in ${{ }} as it will always evaluate to true.
         # See https://github.com/actions/runner/issues/1173
-        if: steps.release.outputs.released == 'true'
 
       # - name: Publish package distributions to GitHub Releases
       #   uses: python-semantic-release/upload-to-gh-release@fa2bbbf8e61069551abd513fdc5627e14c8637c7 # v9.8.8
