@@ -20,16 +20,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-        # with:
-        #   fetch-depth: 0
-        #   token: ${{ secrets.RELEASE_GITHUB_TOKEN }}
-
-      - name: Python Semantic Release
-        id: release
-        uses: python-semantic-release/python-semantic-release@v9.8.8
         with:
-          github_token: ${{ secrets.RELEASE_GITHUB_TOKEN }}
-
+          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
@@ -38,12 +30,14 @@ jobs:
 
       - name: Publish package distributions to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
         # NOTE: DO NOT wrap the conditional in ${{ }} as it will always evaluate to true.
         # See https://github.com/actions/runner/issues/1173
         if: steps.release.outputs.released == 'true'
 
-      - name: Publish package distributions to GitHub Releases
-        uses: python-semantic-release/upload-to-gh-release@fa2bbbf8e61069551abd513fdc5627e14c8637c7 # v9.8.8
-        if: steps.release.outputs.released == 'true'
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Publish package distributions to GitHub Releases
+      #   uses: python-semantic-release/upload-to-gh-release@fa2bbbf8e61069551abd513fdc5627e14c8637c7 # v9.8.8
+      #   if: steps.release.outputs.released == 'true'
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
