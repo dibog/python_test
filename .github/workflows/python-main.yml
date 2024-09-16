@@ -1,12 +1,10 @@
 # This workflow will install Python dependencies, run tests and lint with a single version of Python
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
 
-name: Python application
+name: Python main workflow
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
     branches: [ "main" ]
 
 permissions:
@@ -31,8 +29,7 @@ jobs:
     - run: poetry install
 
     - name: Check pre-commit
-      run: |
-        poetry run pre-commit run -a
+      run: poetry run pre-commit run -a
 
     - name: Build Wheel
       run: |
@@ -45,8 +42,7 @@ jobs:
         enablement: true
 
     - name: Build pages
-      run: |
-        poetry run mkdocs build -s -d _site
+      run: poetry run mkdocs build -s -d _site
 
     - name: Upload Pages Folder
       uses: actions/upload-pages-artifact@v3
@@ -61,7 +57,6 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-
 
     runs-on: ubuntu-latest
     steps:
