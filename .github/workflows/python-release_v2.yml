@@ -1,0 +1,39 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+
+name: Python release
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    if: github.repository == 'dibog/python_test'
+    runs-on: ubuntu-latest
+    concurrency: release
+    permissions:
+      id-token: write
+    environment: pypi.org
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Python Semantic Release
+        id: release
+        uses: python-semantic-release/python-semantic-release@v9.8.8
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: 'poetry'
+
+      - name: Publish package distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        # NOTE: DO NOT wrap the conditional in ${{ }} as it will always evaluate to true.
+        # See https://github.com/actions/runner/issues/1173
+        if: steps.release.outputs.released == 'true'
