@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "python-test"
+name = "python_test"
 version = "v0.1.2"
 description = ""
 authors = ["Dieter Bogdoll <dibog@github.com>"]
