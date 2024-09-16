@@ -24,7 +24,7 @@ jobs:
       - run: poetry install
       - run: poetry run pre-commit run -a
       - run: poetry build
-      - run: cz changelog
+      - run: poetry run cz changelog
       - run: env | sort
 
       - name: Release
